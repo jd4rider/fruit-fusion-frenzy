@@ -62,6 +62,19 @@ export function levelTitle(level: JourneyLevel): string {
   return `Level ${level.index}`
 }
 
+/**
+ * The fruit a Journey level is really about. Tier, count and "merge into"
+ * goals name it outright; score, chain, merge and Golden Harvest goals aim at
+ * the largest fruit the level's drop pool can build.
+ */
+export function goalTierFor(level: JourneyLevel): number {
+  const objective = level.objective
+  const clamp = (tier: number): number => Math.max(1, Math.min(MAX_TIER, Math.round(tier)))
+  if (objective.kind === 'tier') return clamp(objective.target)
+  if (objective.kind === 'fruit' || objective.kind === 'tierCount') return clamp(objective.tier ?? 1)
+  return clamp(Math.max(1, ...level.allowedTiers))
+}
+
 export function allowedTierName(tier: number): string {
   const names = ['blueberry', 'cherry', 'lime', 'apricot', 'peach', 'apple', 'pear', 'orange', 'grapefruit', 'melon', 'watermelon']
   return names[Math.max(0, Math.min(MAX_TIER - 1, tier - 1))] ?? 'fruit'

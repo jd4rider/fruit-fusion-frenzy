@@ -3,7 +3,7 @@ import { fruitThemeById } from '../config/themes'
 import { WORLDS, worldById } from '../config/worlds'
 import { sound } from '../core/audio'
 import { loadProgress, totalStars, type Progress } from '../core/saves'
-import { globalIndexFor, levelsForWorld, type JourneyLevel } from '../game/journey'
+import { globalIndexFor, goalTierFor, levelsForWorld, type JourneyLevel } from '../game/journey'
 import { Backdrop } from './Backdrop'
 import {
   button,
@@ -322,11 +322,14 @@ export class JourneyScene extends Phaser.Scene {
       }),
     )
     overlay.add(display(this, 360, 424, `LEVEL ${level.index}`, 34, '#ffffff', 0.5))
-    const image = this.add.image(360, 492, fruitKey(this.progress.settings.fruitThemeId, Math.min(11, level.objective.target + 1)))
-    image.setDisplaySize(74, 74)
+    overlay.add(
+      label(this, 360, 466, 'GOAL FRUIT', 9, accent, { origin: 0.5, fontStyle: 'bold', letterSpacing: 2.4 }),
+    )
+    const image = this.add.image(360, 508, fruitKey(this.progress.settings.fruitThemeId, goalTierFor(level)))
+    image.setDisplaySize(70, 70)
     overlay.add(image)
     overlay.add(
-      label(this, 360, 552, level.objective.label.toUpperCase(), 18, '#ffffff', {
+      label(this, 360, 566, level.objective.label.toUpperCase(), 18, '#ffffff', {
         origin: 0.5,
         fontStyle: 'bold',
         align: 'center',
@@ -334,31 +337,31 @@ export class JourneyScene extends Phaser.Scene {
       }),
     )
     overlay.add(
-      label(this, 360, 590, `${level.dropLimit} DROPS MAX  ·  ${level.solutionDrops} FOR THREE STARS`, 11, '#ffffff', {
+      label(this, 360, 600, `${level.dropLimit} DROPS MAX  ·  ${level.solutionDrops} FOR THREE STARS`, 11, '#ffffff', {
         origin: 0.5,
         alpha: 0.62,
         letterSpacing: 1,
       }),
     )
-    overlay.add(starRow(this, 360, 634, this.progress.journey.stars[level.id] ?? 0, 30, 3))
+    overlay.add(starRow(this, 360, 644, this.progress.journey.stars[level.id] ?? 0, 30, 3))
     const bestDrops = this.progress.journey.bestDrops[level.id]
     overlay.add(
-      label(this, 360, 670, bestDrops ? `YOUR BEST: ${bestDrops} DROPS` : 'NOT CLEARED YET', 11, '#ffffff', {
+      label(this, 360, 680, bestDrops ? `YOUR BEST: ${bestDrops} DROPS` : 'NOT CLEARED YET', 11, '#ffffff', {
         origin: 0.5,
         alpha: 0.55,
       }),
     )
     overlay.add(
-      label(this, 360, 700, level.hint, 11, '#ffffff', { origin: 0.5, alpha: 0.5, wrap: 500, align: 'center' }),
+      label(this, 360, 710, level.hint, 11, '#ffffff', { origin: 0.5, alpha: 0.5, wrap: 500, align: 'center' }),
     )
     overlay.add(
-      button(this, 100, 730, 520, 64, 'PLAY LEVEL', () => {
+      button(this, 100, 744, 520, 64, 'PLAY LEVEL', () => {
         sound.select()
         fadeTo(this, 'Game', { mode: 'journey', levelId: level.id })
       }, { fill: '#e0642f', size: 24, glow: true, accent }),
     )
     overlay.add(
-      label(this, 360, 826, 'TAP OUTSIDE TO CLOSE', 10, '#ffffff', { origin: 0.5, alpha: 0.45, letterSpacing: 1.5 }),
+      label(this, 360, 836, 'TAP OUTSIDE TO CLOSE', 10, '#ffffff', { origin: 0.5, alpha: 0.45, letterSpacing: 1.5 }),
     )
     this.add.existing(overlay)
     overlay.setAlpha(0)

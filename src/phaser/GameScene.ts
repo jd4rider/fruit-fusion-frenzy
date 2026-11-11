@@ -11,7 +11,7 @@ import {
   type Progress,
 } from '../core/saves'
 import { arcade } from '../integration/LittleJoyAdapter'
-import { TOTAL_LEVELS, journeyStars, levelById, type JourneyLevel } from '../game/journey'
+import { TOTAL_LEVELS, goalTierFor, journeyStars, levelById, type JourneyLevel } from '../game/journey'
 import { dailyKey, dailySeed, MODES } from '../game/modes'
 import { GameSession } from '../game/session'
 import { chainLabel } from '../game/scoring'
@@ -370,7 +370,14 @@ export class GameScene extends Phaser.Scene {
     })
     card.setAlpha(0.94)
     this.hudLayer.add(card)
-    this.objectiveText = label(this, 50, objectiveY + 25, '', 15, '#ffffff', {
+    // Journey levels name the fruit they are about and show it, so the goal is
+    // never just a line of text.
+    if (this.level) {
+      const goal = this.add.image(64, objectiveY + 25, fruitKey(this.theme.id, goalTierFor(this.level)))
+      goal.setDisplaySize(38, 38)
+      this.hudLayer.add(goal)
+    }
+    this.objectiveText = label(this, this.level ? 92 : 50, objectiveY + 25, '', 15, '#ffffff', {
       fontStyle: 'bold',
       origin: [0, 0.5],
     })

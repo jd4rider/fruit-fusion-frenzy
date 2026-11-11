@@ -19,11 +19,11 @@ export interface FruitDef {
 }
 
 /**
- * Fruit are sized in logical playfield units. The 1.45 scale keeps even the
+ * Fruit are sized in logical playfield units. The 1.5 scale keeps even the
  * blueberry thumb-sized on a phone while leaving room in the 560-unit jar for
  * two watermelons side by side, which the Golden Harvest needs.
  */
-const FRUIT_SCALE = 1.45
+const FRUIT_SCALE = 1.5
 const diameter = (base: number): number => Math.round(base * FRUIT_SCALE)
 
 export const FRUITS: FruitDef[] = [

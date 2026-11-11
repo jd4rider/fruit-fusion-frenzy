@@ -217,22 +217,24 @@ export class ResultsScene extends Phaser.Scene {
     const colors = [tint, 0xffd166, 0xff7fb8, 0x7bf1a8, 0x7ee6ff]
     const settings = loadProgress().settings
     if (settings.reducedMotion) return
-    const count = settings.quality === 'low' ? 18 : 40
+    // A short shower in the left margin, clear of the results card, rather than
+    // sparks raining across the whole screen.
+    const count = settings.quality === 'low' ? 10 : 22
     for (let index = 0; index < count; index += 1) {
-      const x = 360 + (Math.random() - 0.5) * 560
+      const x = 44 + Math.random() * 128
       const particle = this.add
-        .image(x, 210 + Math.random() * 120, SPARK_KEY)
+        .image(x, 292 + Math.random() * 96, SPARK_KEY)
         .setTint(colors[index % colors.length]!)
         .setAlpha(0.85)
-        .setScale(0.4 + Math.random() * 0.7)
+        .setScale(0.32 + Math.random() * 0.5)
       this.tweens.add({
         targets: particle,
-        y: 900 + Math.random() * 260,
-        x: x + (Math.random() - 0.5) * 220,
+        y: 500 + Math.random() * 150,
+        x: x + (Math.random() - 0.5) * 56,
         alpha: 0,
         angle: Math.random() * 360,
-        duration: 2200 + Math.random() * 1600,
-        delay: Math.random() * 500,
+        duration: 1100 + Math.random() * 700,
+        delay: Math.random() * 320,
         ease: 'Cubic.In',
         onComplete: () => particle.destroy(),
       })
