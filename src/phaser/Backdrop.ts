@@ -78,14 +78,17 @@ export class Backdrop {
         break
     }
 
-    // Soft vignette so UI text always reads.
-    graphics.fillStyle(0x000000, 0.16)
-    graphics.fillRect(0, 0, width, height * 0.12)
-    graphics.fillStyle(0x000000, 0.24)
-    graphics.fillRect(0, height * 0.88, width, height * 0.12)
-    graphics.fillStyle(0x000000, 0.12)
-    graphics.fillRect(0, 0, width * 0.04, height)
-    graphics.fillRect(width * 0.96, 0, width * 0.04, height)
+    // Soft vignette so UI text always reads. Gradients keep the edges invisible;
+    // flat bars left a visible frame across every screen.
+    const shade = 0x000000
+    graphics.fillGradientStyle(shade, shade, shade, shade, 0.26, 0.26, 0, 0)
+    graphics.fillRect(0, 0, width, height * 0.26)
+    graphics.fillGradientStyle(shade, shade, shade, shade, 0, 0, 0.3, 0.3)
+    graphics.fillRect(0, height * 0.74, width, height * 0.26)
+    graphics.fillGradientStyle(shade, shade, shade, shade, 0.2, 0, 0.2, 0)
+    graphics.fillRect(0, 0, width * 0.08, height)
+    graphics.fillGradientStyle(shade, shade, shade, shade, 0, 0.2, 0, 0.2)
+    graphics.fillRect(width * 0.92, 0, width * 0.08, height)
   }
 
   private sun(width: number, height: number, color: number, x = 0.78, y = 0.16, radius = 0.09): void {
