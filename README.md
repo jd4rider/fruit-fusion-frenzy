@@ -49,7 +49,7 @@ Matter collision callbacks never create or destroy bodies. A qualifying contact 
 
 ### Journey validation
 
-`npm run levels` regenerates `src/data/journey.json`. For every level the autoplayer explores a run with no objective, records the drop where a milestone was reached, then replays the published level with its objective and drop limit. Only levels where the bot actually wins are written, with the winning aim sequence stored as evidence. `tests/journey.test.ts` replays every recorded solution on the production physics.
+`npm run levels` regenerates `src/data/journey.json`. For every level the autoplayer explores a run with no objective, records the drop where a milestone was reached, then replays the published level with its objective and drop limit. Only levels where the bot actually wins are written, with the winning aim sequence stored as evidence. `tests/journey.test.ts` replays every recorded solution on the production physics; if a different V8 build settles the pile a few pixels apart and the script stalls, it finishes the run with the same autoplayer, so the test proves the level is winnable in its drop limit rather than that one aim list reproduces byte for byte.
 
 ## Development
 
