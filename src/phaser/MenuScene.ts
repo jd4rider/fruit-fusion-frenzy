@@ -39,6 +39,15 @@ export class MenuScene extends Phaser.Scene {
     const stage = designStage(this)
     const root = stage.root
 
+    // A single smooth vertical gradient keeps the wordmark crisp over every
+    // bright world without a visible panel edge or banding across the scenery.
+    const wash = this.add.graphics()
+    wash.fillGradientStyle(0x061019, 0x061019, 0x061019, 0x061019, 0.52, 0.52, 0, 0)
+    wash.fillRect(0, 0, 720, 380)
+    wash.fillStyle(0x061019, 0.12)
+    wash.fillRect(0, 380, 720, 1280 - 380)
+    root.add(wash)
+
     // Floating fruit behind the logo.
     const parade = [2, 3, 5, 7, 11, 6, 4]
     parade.forEach((tier, index) => {
@@ -68,18 +77,6 @@ export class MenuScene extends Phaser.Scene {
       }),
     )
 
-    // A soft vertical gradient keeps the wordmark crisp over every bright
-    // world without leaving a visible panel edge across the scenery.
-    const wash = this.add.graphics()
-    const bands = 18
-    for (let band = 0; band < bands; band += 1) {
-      const top = (band / bands) * 320
-      wash.fillStyle(0x061019, 0.46 * (1 - band / bands) ** 1.4)
-      wash.fillRect(0, top, 720, 320 / bands + 1)
-    }
-    wash.fillStyle(0x061019, 0.12)
-    wash.fillRect(0, 320, 720, 1280 - 320)
-    root.add(wash)
     root.add(display(this, 360, 78, 'FRUIT FUSION', 46, '#ffffff', 0.5))
     root.add(display(this, 360, 150, 'FRENZY', 82, '#ffd166', 0.5))
     root.add(
