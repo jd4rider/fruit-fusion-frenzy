@@ -321,9 +321,9 @@ export class GameScene extends Phaser.Scene {
     // A dark wash keeps the score readable over every world's bright sky.
     const scrim = this.add.graphics()
     scrim.fillStyle(0x050d15, 0.62)
-    scrim.fillRect(0, 0, 720, 198)
+    scrim.fillRect(0, 0, 720, 212)
     scrim.fillStyle(0x050d15, 0.34)
-    scrim.fillRect(0, 198, 720, 40)
+    scrim.fillRect(0, 212, 720, 40)
     scrim.fillStyle(0x050d15, 0.48)
     scrim.fillRect(0, this.view.worldH - 150, 720, 150)
     this.hudLayer.add(scrim)
@@ -334,10 +334,10 @@ export class GameScene extends Phaser.Scene {
     })
     this.hudLayer.add(this.modeText)
 
-    this.scoreText = display(this, 38, 44, '0', 58, '#ffffff', 0)
+    this.scoreText = display(this, 38, 40, '0', 52, '#ffffff', 0)
     this.hudLayer.add(this.scoreText)
 
-    this.bestText = label(this, 40, 112, this.level ? 'BEST 0 DROPS' : 'BEST 0', 15, '#ffffff', { alpha: 0.7 })
+    this.bestText = label(this, 40, 130, this.level ? 'BEST 0 DROPS' : 'BEST 0', 13, '#ffffff', { alpha: 0.7 })
     this.hudLayer.add(this.bestText)
 
     const timed = this.session.snapshot().timeLeftMs !== null
@@ -359,8 +359,8 @@ export class GameScene extends Phaser.Scene {
     })
     this.hudLayer.add(this.pauseButton)
 
-    const objectiveY = 138
-    const card = panel(this, 32, objectiveY, width - 64, 48, {
+    const objectiveY = 156
+    const card = panel(this, 32, objectiveY, width - 64, 50, {
       fill: '#0d1b2c',
       side: '#060d17',
       radius: 16,
@@ -370,12 +370,12 @@ export class GameScene extends Phaser.Scene {
     })
     card.setAlpha(0.94)
     this.hudLayer.add(card)
-    this.objectiveText = label(this, 50, objectiveY + 24, '', 16, '#ffffff', {
+    this.objectiveText = label(this, 50, objectiveY + 25, '', 15, '#ffffff', {
       fontStyle: 'bold',
       origin: [0, 0.5],
     })
     this.hudLayer.add(this.objectiveText)
-    this.objectiveProgressText = label(this, 668, objectiveY + 24, '', 14, accent, {
+    this.objectiveProgressText = label(this, 668, objectiveY + 25, '', 13, accent, {
       fontStyle: 'bold',
       origin: [1, 0.5],
       letterSpacing: 0.4,
@@ -386,7 +386,7 @@ export class GameScene extends Phaser.Scene {
 
     // Next-fruit card.
     const nextX = geometry.right + 6
-    const nextY = geometry.top - 174
+    const nextY = geometry.top - 158
     const nextCard = panel(this, nextX - 112, nextY, 112, 132, {
       fill: '#0c1928',
       side: '#050b14',
@@ -805,7 +805,7 @@ export class GameScene extends Phaser.Scene {
       const width = 720 - 64 - 36
       const ratio = Math.max(0, Math.min(1, snapshot.objectiveCurrent / objective.target))
       const barX = 50
-      const barY = 168
+      const barY = 192
       this.objectiveBar.fillStyle(0xffffff, 0.1)
       this.objectiveBar.fillRoundedRect(barX, barY, width, 7, 4)
       this.objectiveBar.fillStyle(hex(snapshot.objectiveDone ? '#7bf1a8' : this.worldDef.accent), 0.95)

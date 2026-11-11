@@ -5,6 +5,14 @@ import { DESIGN_H, DESIGN_W } from './layout'
 export const FONT = '"Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif'
 export const DISPLAY = '"Arial Black", "Trebuchet MS", "Segoe UI", sans-serif'
 
+/**
+ * The design canvas is 720x1280, so on a 390px phone every design pixel is
+ * about 0.54 CSS pixels. Type is authored at its comfortable design size and
+ * scaled here so labels stay legible on a handset instead of shrinking to
+ * five pixels.
+ */
+export const UI_SCALE = 1.28
+
 export function hex(value: string): number {
   return Phaser.Display.Color.HexStringToColor(value).color
 }
@@ -43,7 +51,7 @@ export function label(
 ): Phaser.GameObjects.Text {
   const text = scene.add.text(x, y, content, {
     fontFamily: options.fontFamily ?? FONT,
-    fontSize: `${size}px`,
+    fontSize: `${Math.round(size * UI_SCALE)}px`,
     color,
     align: options.align ?? 'left',
     fontStyle: options.fontStyle,
@@ -173,7 +181,7 @@ export function button(
   }
   container.add(graphics)
 
-  const textY = height / 2 - (options.subtitle ? 8 : 1)
+  const textY = height / 2 - (options.subtitle ? 11 : 1)
   container.add(
     label(scene, width / 2, textY, text, options.size ?? 22, options.textColor ?? '#ffffff', {
       origin: 0.5,
@@ -183,7 +191,7 @@ export function button(
   )
   if (options.subtitle) {
     container.add(
-      label(scene, width / 2, height - 17, options.subtitle, 12, options.textColor ?? '#ffffff', {
+      label(scene, width / 2, height - 16, options.subtitle, 12, options.textColor ?? '#ffffff', {
         origin: 0.5,
         alpha: 0.7,
         letterSpacing: 1.2,
@@ -232,13 +240,13 @@ export function iconButton(
   }
   container.add(graphics)
   container.add(
-    label(scene, 0, options.caption ? -4 : 0, glyph, size * 0.4, options.color ?? '#ffffff', {
+    label(scene, 0, options.caption ? -size * 0.12 : 0, glyph, size * 0.4, options.color ?? '#ffffff', {
       origin: 0.5,
       fontStyle: 'bold',
     }),
   )
   if (options.caption) {
-    container.add(label(scene, 0, size * 0.28, options.caption, 9, options.color ?? '#ffffff', { origin: 0.5, alpha: 0.75 }))
+    container.add(label(scene, 0, size * 0.34, options.caption, 9, options.color ?? '#ffffff', { origin: 0.5, alpha: 0.75 }))
   }
   container.setSize(size, size)
   if (!options.disabled) {

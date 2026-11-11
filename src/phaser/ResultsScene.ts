@@ -80,7 +80,7 @@ export class ResultsScene extends Phaser.Scene {
         fontStyle: 'bold',
       }),
     )
-    root.add(display(this, 360, 100, title, this.payload.level ? 40 : 38, '#ffffff', 0.5))
+    root.add(display(this, 360, 98, title, 36, '#ffffff', 0.5))
     root.add(
       label(this, 360, 142, won ? 'BEAUTIFULLY FUSED' : this.payload.mode === 'zen' ? 'A GENTLE RESET' : 'THE JAR RAN OUT OF ROOM', 11, '#ffffff', {
         origin: 0.5,
@@ -111,9 +111,9 @@ export class ResultsScene extends Phaser.Scene {
       onComplete: () => scoreText.setText(formatNumber(targetScore)),
     })
     if (this.payload.newBest) {
-      const badge = panel(this, 268, 300, 184, 30, { fill: '#f2a11b', side: '#8a5300', radius: 15, raised: 2, highlight: false })
+      const badge = panel(this, 264, 314, 192, 32, { fill: '#f2a11b', side: '#8a5300', radius: 16, raised: 2, highlight: false })
       root.add(badge)
-      root.add(label(this, 360, 315, 'NEW PERSONAL BEST', 10, '#1c1204', { origin: 0.5, fontStyle: 'bold', letterSpacing: 1 }))
+      root.add(label(this, 360, 330, 'NEW PERSONAL BEST', 10, '#1c1204', { origin: 0.5, fontStyle: 'bold', letterSpacing: 1 }))
     }
 
     if (this.payload.level) {

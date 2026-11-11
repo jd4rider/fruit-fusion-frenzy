@@ -69,7 +69,7 @@ export class MenuScene extends Phaser.Scene {
     })
 
     root.add(
-      label(this, 360, 26, 'LITTLE JOY ARCADE', 10, world.accent, {
+      label(this, 360, 38, 'LITTLE JOY ARCADE', 10, world.accent, {
         origin: 0.5,
         letterSpacing: 4,
         fontStyle: 'bold',
@@ -77,10 +77,10 @@ export class MenuScene extends Phaser.Scene {
       }),
     )
 
-    root.add(display(this, 360, 78, 'FRUIT FUSION', 46, '#ffffff', 0.5))
-    root.add(display(this, 360, 150, 'FRENZY', 82, '#ffd166', 0.5))
+    root.add(display(this, 360, 88, 'FRUIT FUSION', 42, '#ffffff', 0.5))
+    root.add(display(this, 360, 168, 'FRENZY', 76, '#ffd166', 0.5))
     root.add(
-      label(this, 360, 208, 'DROP IT · MERGE IT · UNLEASH THE FRENZY', 12, '#ffffff', {
+      label(this, 360, 238, 'DROP IT · MERGE IT · UNLEASH THE FRENZY', 12, '#ffffff', {
         origin: 0.5,
         letterSpacing: 2.4,
         alpha: 0.75,
@@ -91,15 +91,15 @@ export class MenuScene extends Phaser.Scene {
     // Progress pill.
     const pill = this.add.graphics()
     pill.fillStyle(0x000000, 0.26)
-    pill.fillRoundedRect(120, 236, 480, 36, 18)
+    pill.fillRoundedRect(120, 264, 480, 40, 20)
     pill.lineStyle(1, 0xffffff, 0.14)
-    pill.strokeRoundedRect(120, 236, 480, 36, 18)
+    pill.strokeRoundedRect(120, 264, 480, 40, 20)
     root.add(pill)
     root.add(
       label(
         this,
         360,
-        254,
+        284,
         `\u2605 ${totalStars(progress)}   ·   JOURNEY ${Math.min(TOTAL_LEVELS, progress.journey.unlocked - 1)}/${TOTAL_LEVELS}`,
         13,
         '#ffffff',
@@ -109,9 +109,9 @@ export class MenuScene extends Phaser.Scene {
 
     const x = 50
     const width = 620
-    const startY = 290
-    const height = 68
-    const gap = 7
+    const startY = 320
+    const height = 78
+    const gap = 8
     const accent = world.accent
 
     const primary = [
@@ -181,19 +181,25 @@ export class MenuScene extends Phaser.Scene {
     ]
     const iconY = startY + primary.length * (height + gap) + 44
     icons.forEach((entry, index) => {
-      const spacing = 118
+      const spacing = 124
       const startX = 360 - ((icons.length - 1) * spacing) / 2
       root.add(
         iconButton(this, startX + index * spacing, iconY, entry.glyph, entry.action, {
-          size: 62,
+          size: 68,
           fill: '#16283f',
-          caption: entry.caption,
           accent,
+        }),
+      )
+      root.add(
+        label(this, startX + index * spacing, iconY + 48, entry.caption, 9, '#ffffff', {
+          origin: 0.5,
+          alpha: 0.8,
+          letterSpacing: 0.6,
         }),
       )
     })
 
-    const help = label(this, 360, iconY + 72, 'HOW TO PLAY', 14, accent, {
+    const help = label(this, 360, iconY + 92, 'HOW TO PLAY', 14, accent, {
       origin: 0.5,
       fontStyle: 'bold',
       letterSpacing: 2.5,

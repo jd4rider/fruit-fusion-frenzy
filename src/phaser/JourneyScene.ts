@@ -19,7 +19,7 @@ import {
 import { designStage, type Stage } from './layout'
 import { ensureFruitTextures, fruitKey } from './textures'
 
-const MAP_TOP = 218
+const MAP_TOP = 238
 const MAP_HEIGHT = 960
 
 /** A vector padlock, so locked markers never depend on an emoji font. */
@@ -72,7 +72,7 @@ export class JourneyScene extends Phaser.Scene {
     const root = this.stage.root
     const scrim = this.add.graphics()
     scrim.fillStyle(0x061019, 0.42)
-    scrim.fillRect(0, 0, 720, 226)
+    scrim.fillRect(0, 0, 720, 246)
     scrim.fillStyle(0x061019, 0.24)
     scrim.fillRect(0, 0, 720, 1280)
     root.add(scrim)
@@ -82,9 +82,9 @@ export class JourneyScene extends Phaser.Scene {
     root.add(this.tabStrip)
     this.buildTabs()
 
-    this.worldLabel = display(this, 360, 176, world.name.toUpperCase(), 24, '#ffffff', 0.5)
+    this.worldLabel = display(this, 360, 188, world.name.toUpperCase(), 22, '#ffffff', 0.5)
     root.add(this.worldLabel)
-    this.starLabel = label(this, 360, 198, '', 11, world.accent, { origin: 0.5, letterSpacing: 1.5, fontStyle: 'bold' })
+    this.starLabel = label(this, 360, 212, '', 10, world.accent, { origin: 0.5, letterSpacing: 1.2, fontStyle: 'bold' })
     root.add(this.starLabel)
 
     this.maskShape = this.make.graphics({ x: 0, y: 0 }, false)
@@ -113,7 +113,7 @@ export class JourneyScene extends Phaser.Scene {
       const column = index % 5
       const row = Math.floor(index / 5)
       const x = 66 + column * 144
-      const y = 84 + row * 44
+      const y = 94 + row * 44
       const selected = world.id === this.worldId
       const unlocked = this.progress.journey.unlocked >= (world.id - 1) * 50 + 1
       const chip = this.add.graphics()
@@ -122,7 +122,7 @@ export class JourneyScene extends Phaser.Scene {
       chip.lineStyle(1, 0xffffff, selected ? 0.4 : 0.1)
       chip.strokeRoundedRect(x - 66, y - 17, 132, 34, 12)
       this.tabStrip.add(chip)
-      const text = label(this, x + (unlocked ? 0 : 7), y, `${world.id}  ${world.name.split(' ')[0].toUpperCase()}`, 10, selected ? '#07131c' : '#ffffff', {
+      const text = label(this, x + (unlocked ? 0 : 7), y, `${world.id}  ${world.name.split(' ')[0].toUpperCase()}`, 9, selected ? '#07131c' : '#ffffff', {
         origin: 0.5,
         fontStyle: 'bold',
         alpha: unlocked ? 1 : 0.5,

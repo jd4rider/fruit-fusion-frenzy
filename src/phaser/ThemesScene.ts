@@ -89,7 +89,7 @@ export class ThemesScene extends Phaser.Scene {
       const y = 148 + Math.floor(index / 2) * 160
       const unlocked = isUnlocked(theme.starsRequired, this.progress)
       const selected = theme.id === selectedId
-      const card = panel(this, x, y, 300, 146, {
+      const card = panel(this, x, y, 300, 152, {
         fill: selected ? '#1d3a3a' : '#0f1f31',
         side: '#060c15',
         radius: 20,
@@ -105,8 +105,8 @@ export class ThemesScene extends Phaser.Scene {
         if (!unlocked) image.setTint(0x556070)
         this.content.add(image)
       })
-      this.content.add(label(this, x + 16, y + 94, theme.name.toUpperCase(), 13, '#ffffff', { fontStyle: 'bold' }))
-      this.content.add(label(this, x + 16, y + 114, unlocked ? theme.blurb : `UNLOCK AT \u2605 ${theme.starsRequired}`, 10, '#ffffff', {
+      this.content.add(label(this, x + 16, y + 92, theme.name.toUpperCase(), 13, '#ffffff', { fontStyle: 'bold' }))
+      this.content.add(label(this, x + 16, y + 118, unlocked ? theme.blurb : `UNLOCK AT \u2605 ${theme.starsRequired}`, 10, '#ffffff', {
         alpha: 0.72,
         wrap: 268,
       }))
@@ -121,7 +121,7 @@ export class ThemesScene extends Phaser.Scene {
         lock.fillRoundedRect(x + 240, y + 46, 20, 16, 5)
         this.content.add(lock)
       }
-      const hit = this.add.rectangle(x + 150, y + 73, 300, 146, 0xffffff, 0)
+      const hit = this.add.rectangle(x + 150, y + 76, 300, 152, 0xffffff, 0)
       hit.setInteractive({ useHandCursor: true })
       hit.on('pointerup', () => {
         if (!unlocked) {
