@@ -1,0 +1,29 @@
+{
+  "name": "fruit-fusion-frenzy",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Fruit Fusion Frenzy \u2014 a juicy physics fruit-merging arcade game for Little Joy Arcade.",
+  "author": "jd4rider",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "levels": "tsx scripts/generate-levels.ts"
+  },
+  "dependencies": {
+    "matter-js": "^0.20.0",
+    "phaser": "^3.90.0"
+  },
+  "devDependencies": {
+    "@types/matter-js": "^0.20.2",
+    "@types/node": "^26.6.6",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
+  }
+}
