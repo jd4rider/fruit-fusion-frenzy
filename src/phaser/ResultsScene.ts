@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { openTipJar } from './support'
 import { backgroundThemeById, fruitThemeById } from '../config/themes'
 import { fruitDef } from '../config/fruits'
 import { worldById } from '../config/worlds'
@@ -203,6 +204,15 @@ export class ResultsScene extends Phaser.Scene {
         }),
       )
     })
+
+    // Quiet support link: results screen only, under the action row.
+    root.add(
+      button(this, 360, 736, 320, 32, '☕  BUY ME A COFFEE', () => openTipJar(), {
+        fill: '#1b3350',
+        size: 11,
+        accent,
+      }),
+    )
 
     root.add(
       label(this, 360, 786, 'EVERY FRUIT YOU GREW IS SAVED', 10, '#ffffff', { origin: 0.5, alpha: 0.45, letterSpacing: 1.4 }),
