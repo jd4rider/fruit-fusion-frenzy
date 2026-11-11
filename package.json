@@ -1,7 +1,7 @@
 {
   "name": "fruit-fusion-frenzy",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Fruit Fusion Frenzy \u2014 a juicy physics fruit-merging arcade game for Little Joy Arcade.",
   "author": "jd4rider",
